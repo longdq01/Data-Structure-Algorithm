@@ -34,9 +34,4 @@ public class QuickSort {
         return il;
     }
 
-    public static void main(String[] args) {
-        int[] nums = new int[]{-1, 2, 7, , -10};
-        quickSort(nums, 0, nums.length - 1);
-        System.out.println(Arrays.toString(nums));
-    }
 }
