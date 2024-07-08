@@ -8,29 +8,29 @@ public class MyBST {
     public MyBST() {
     }
 
-//    public void insert(int value){
-//        TreeNode node = new TreeNode(value);
-//        if(root == null){
-//            return;
-//        }
-//
-//        TreeNode cur = root;
-//        while(true){
-//            if(value > cur.val){
-//                if(cur.right == null){
-//                    cur.right = node;
-//                    return;
-//                }
-//                cur = cur.right;
-//            }else{
-//                if(cur.left == null){
-//                    cur.left = node;
-//                    return;
-//                }
-//                cur = cur.left;
-//            }
-//        }
-//    }
+    public void insert(int value){
+        TreeNode node = new TreeNode(value);
+        if(root == null){
+            return;
+        }
+
+        TreeNode cur = root;
+        while(true){
+            if(value > cur.val){
+                if(cur.right == null){
+                    cur.right = node;
+                    return;
+                }
+                cur = cur.right;
+            }else{
+                if(cur.left == null){
+                    cur.left = node;
+                    return;
+                }
+                cur = cur.left;
+            }
+        }
+    }
 
     public TreeNode insertIntoBST(TreeNode root, int val) {
         if(root == null){
