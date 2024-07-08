@@ -1,9 +1,7 @@
 package inplace_manipulation_linkedlist;
 
-import linkedlist.LinkedListCycle_141;
-
 public class ReverseLinkedListII_92 {
-    static class ListNode{
+    public static class ListNode{
         int val;
         ListNode next;
 
