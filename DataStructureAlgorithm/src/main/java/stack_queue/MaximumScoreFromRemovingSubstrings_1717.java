@@ -56,7 +56,6 @@ public class MaximumScoreFromRemovingSubstrings_1717 {
                         stack.push(c);
                     }
                 } else {
-                    // aaaabbb
                     int bCount = 0, aCount = 0;
                     while(!stack.isEmpty()){
                         char top = stack.pop();
