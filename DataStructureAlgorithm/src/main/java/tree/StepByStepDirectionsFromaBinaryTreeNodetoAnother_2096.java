@@ -1,66 +1,58 @@
 package tree;
 
-import java.util.*;
-
 public class StepByStepDirectionsFromaBinaryTreeNodetoAnother_2096 {
-    ArrayList<Integer> nodes = new ArrayList<>();
-    Queue<TreeNode> bfs = new ArrayDeque<>();
-    int startIdx, destIdx, curIdx = 1;
+    class Path{
+        StringBuilder path = new StringBuilder();
+    }
 
-    StringBuilder directions = new StringBuilder();
     public String getDirections(TreeNode root, int startValue, int destValue) {
-        traversal(root, startValue, destValue);
-        goUp();
-        directions.append(goDown());
-        return directions.toString();
+        TreeNode lca = lowestCommonAncestor(root, startValue, destValue);
+
+        // start -> lca -> dest
+        Path startPath = new Path();
+        Path destPath = new Path();
+
+        findPath(lca, startValue, startPath);
+        findPath(lca, destValue, destPath);
+        return "U".repeat(startPath.path.length()) + destPath.path.toString();
     }
 
-    private void goUp(){
-        // check destIdx is not bottom of startIdx
-        int x = log2((double) destIdx / startIdx);
-        int level = (int) Math.pow(2, x);
-        while(!(startIdx * level <= destIdx && destIdx <= startIdx * level + level - 1)){
-            directions.append("U");
-            startIdx /= 2;
-            x = log2((double) destIdx / startIdx);
-            level = (int) Math.pow(2, x);
+    public boolean findPath(TreeNode root, int dest, Path p){
+        if(root == null)
+            return false;
+
+        if (root.val == dest) {
+            return true;
         }
-    }
 
-    private String goDown(){
-        StringBuilder sb = new StringBuilder();
-        while(destIdx != startIdx){
-            if(destIdx % 2 != 0)
-                sb.append("R");
-            else
-                sb.append("L");
-            destIdx /= 2;
+        p.path.append("R");
+        if(findPath(root.right, dest, p)){
+            return true;
         }
-        return sb.reverse().toString();
-    }
+        p.path.deleteCharAt(p.path.length() - 1);
 
-    private int log2(double a){
-        return (int) (Math.log(a) / Math.log(2));
-    }
-
-    private void traversal(TreeNode root, int startValue, int destValue){
-        bfs.add(root);
-
-        while(!bfs.isEmpty()){
-            TreeNode node = bfs.poll();
-            if(node.val != 0){
-                if(node.val == startValue)
-                    startIdx = curIdx;
-                if(node.val == destValue)
-                    destIdx = curIdx;
-                nodes.add(node.val);
-                bfs.add(node.left == null ? new TreeNode(0) : node.left);
-                bfs.add(node.right == null ? new TreeNode(0) : node.right);
-            }else{
-                nodes.add(null);
-            }
-            curIdx++;
+        p.path.append("L");
+        if(findPath(root.left, dest, p)){
+            return true;
         }
+        p.path.deleteCharAt(p.path.length() - 1);
+        return false;
+    }
+
+    public TreeNode lowestCommonAncestor(TreeNode root, int startValue, int destValue) {
+        if (root == null)
+            return null;
+
+        if (root.val == startValue || root.val == destValue)
+            return root;
+
+        TreeNode leftNode = lowestCommonAncestor(root.left, startValue, destValue);
+        TreeNode rightNode = lowestCommonAncestor(root.right, startValue, destValue);
+
+        if (leftNode != null && rightNode != null)
+            return root;
+
+        return (leftNode != null) ? leftNode : rightNode;
     }
 
     public static void main(String[] args) {
@@ -80,6 +72,6 @@ public class StepByStepDirectionsFromaBinaryTreeNodetoAnother_2096 {
         n3.left = n6;
         n6.right = n7;
         s.getDirections(root, 2, 1);
-        System.out.println(s.directions);
+
     }
 }
