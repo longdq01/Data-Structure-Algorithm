@@ -42,17 +42,21 @@ public class MinimumDeletionsToMakeStringBalanced_1653 {
 //                tmp2 = Math.min(tmp2, tmp1 + tmp2 - list.get(j + 1).get(1));
 //            }
 //        }
-        for (int j = idx; j < list.size(); j+=2) {
+        int j;
+        for (j = idx; j < list.size(); j+=2) {
             tmp1 += list.get(j).get(1);
             if(j + 1 < list.size()){
                 tmp2 = Math.min(tmp2, tmp1 + tmp2 - list.get(j + 1).get(1));
             }
+        }
+        if(j - 2 >= list.size() && s.charAt(list.get(j - 2).get(0) - 1) == 'b'){
+            tmp1 = tmp1 - list.get(j - 2).get(1);
         }
         return Math.min(tmp1, tmp2);
     }
 
     public static void main(String[] args) {
         MinimumDeletionsToMakeStringBalanced_1653 m = new MinimumDeletionsToMakeStringBalanced_1653();
-        System.out.println(m.minimumDeletions("aaabbbbb"));
+        System.out.println(m.minimumDeletions("aababbab"));
     }
 }
