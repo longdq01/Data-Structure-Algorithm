@@ -11,7 +11,7 @@ public class LongerContiguousSegmentsOfOnesthanZeros_1869 {
                 d[sl] = Math.max(d[sl], r - l);
                 l = r;
             }
-            r++;
+            r++; 
         }
         int sl = s.charAt(l) - '0';
         d[sl] = Math.max(d[sl], r - l);
