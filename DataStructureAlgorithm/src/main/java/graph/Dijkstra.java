@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Dijkstra {
     public static void dijkstra(int[][] a, int start, int end){
-        Set<Integer> visisted = new HashSet<>();
+        Set<Integer> visited = new HashSet<>();
         int n = a.length;
         int[] previous = new int[n];
         int[] distance = new int[n];
@@ -15,10 +15,10 @@ public class Dijkstra {
         distance[start] = 0;
 
         int cur = start;
-        while(visisted.size() < n){
-            visisted.add(cur);
+        while(visited.size() < n){
+            visited.add(cur);
             for (int i = 0; i < n; i++) {
-                if(a[cur][i] != 0 && !visisted.contains(i)){
+                if(a[cur][i] != 0 && !visited.contains(i)){
                     int tmp = distance[cur] + a[cur][i];
                     if(tmp < distance[i]){
                         distance[i] = tmp;
@@ -30,7 +30,7 @@ public class Dijkstra {
             int minVal = Integer.MAX_VALUE;
             cur = 0;
             for (int i = 0; i < n; i++){
-                if(!visisted.contains(i) && distance[i] < minVal){
+                if(!visited.contains(i) && distance[i] < minVal){
                     cur = i;
                     minVal = distance[i];
                 }

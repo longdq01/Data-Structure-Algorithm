@@ -13,4 +13,6 @@ public class MaximumProductofTwoElementsinanArray {
         }
         return (max1 - 1) * (max2 - 1);
     }
+
+   
 }

@@ -72,6 +72,5 @@ public class StepByStepDirectionsFromaBinaryTreeNodetoAnother_2096 {
         n3.left = n6;
         n6.right = n7;
         s.getDirections(root, 2, 1);
-
     }
 }

@@ -469,8 +469,72 @@ public class ABC {
         return true;
     }
 
+    public boolean heightBalanced(TreeNode root) {
+        if(root == null)
+            return true;
+
+        int left = height(root.left);
+        int right = height(root.right);
+        if(Math.abs(left - right) > 1)
+            return false;
+        else return left != -1 && right != -1;
+    }
+
+    public int height(TreeNode root){
+        if(root == null)
+            return 0;
+        int left = height(root.left);
+        int right = height(root.right);
+        if(Math.abs(left - right) > 1)
+            return -1;
+        else if(left == -1 || right == -1)
+            return -1;
+
+        return 1 + Math.max(height(root.left), height(root.right));
+    }
+
+    public static boolean checkStraightLine(int[][] coordinates) {
+        // y = ax + b
+        if(coordinates[1][0] - coordinates[0][0] == 0){
+            for (int i = 2; i < coordinates.length; i++) {
+                if(coordinates[i][0] != coordinates[0][0])
+                    return false;
+            }
+            return true;
+        }
+        double a = (double) (coordinates[1][1] - coordinates[0][1]) / (coordinates[1][0] - coordinates[0][0]);
+        double b = coordinates[1][1] - a * coordinates[1][0];
+
+        for (int i = 2; i < coordinates.length; i++) {
+            if(a * coordinates[i][0] + b != coordinates[i][1])
+                return false;
+        }
+        return true;
+    }
+
+    public int sumSubarrayMins(int[] arr, int k) {
+        Arrays.sort(arr);
+        int n = arr.length;
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            if(i < n / 2){
+                min = Math.min(min, arr[i] + k);
+                max = Math.max(max, arr[i] + k);
+            }else{
+                min = Math.min(min, arr[i] - k);
+                max = Math.max(max, arr[i] - k);
+            }
+        }
+        return max - min;
+    }
 
     public static void main(String[] args) {
-        numberOfMatches(7);
+        checkStraightLine(new int[][]{
+                {0, 0},
+                {   0, -1},
+                {0 ,1}
+
+        });
     }
 }
