@@ -529,12 +529,25 @@ public class ABC {
         return max - min;
     }
 
-    public static void main(String[] args) {
-        checkStraightLine(new int[][]{
-                {0, 0},
-                {   0, -1},
-                {0 ,1}
+//    public int findComplement(int num) {
+//        int bits = (int) (Math.log(num) / Math.log(2)) + 1;
+//        for (int i = 0; i < bits; i++) {
+//            num ^= (1 << i);
+//        }
+//        return num;
+//    }
 
-        });
+    public static int findComplement(int num) {
+        int bits = (int) (Math.log(num) / Math.log(2)) + 1;
+
+        return (1 << bits) - 1 - num;
+    }
+
+
+
+    public static void main(String[] args) {
+//        findComplement(2147483647);
+        System.out.println((8 << 1) << 1);
+        System.out.println(1 ^ 2 ^ 32);
     }
 }
