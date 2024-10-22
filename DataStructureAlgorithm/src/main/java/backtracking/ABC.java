@@ -543,11 +543,27 @@ public class ABC {
         return (1 << bits) - 1 - num;
     }
 
+    static int a = 0;
 
+    public static void main(String[] args) throws InterruptedException {
+        add();
+        add();
+        add();
+        Thread.sleep(1000);
+        System.out.println(a);
+    }
 
-    public static void main(String[] args) {
-//        findComplement(2147483647);
-        System.out.println((8 << 1) << 1);
-        System.out.println(1 ^ 2 ^ 32);
+    public static void add() throws InterruptedException {
+        Runnable myRunnable = new Runnable(){
+            public void run(){
+                for (int i = 0; i < 10000; i++) {
+                    a += 1;
+                }
+            }
+        };
+
+        Thread t = new Thread(myRunnable);
+        t.start();
+        t.join();
     }
 }

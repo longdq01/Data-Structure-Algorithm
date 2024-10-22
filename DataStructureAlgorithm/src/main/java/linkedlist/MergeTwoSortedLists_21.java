@@ -1,7 +1,5 @@
 package linkedlist;
 
-import java.util.List;
-
 public class MergeTwoSortedLists_21 {
     static class ListNode{
         int val;
